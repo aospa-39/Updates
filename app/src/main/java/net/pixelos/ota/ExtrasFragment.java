@@ -305,18 +305,6 @@ public class ExtrasFragment extends Fragment {
             return;
         }
 
-        ArrayList<MaintainerInfo> maintainers = update.getMaintainers();
-        if (maintainers != null && !maintainers.isEmpty()) {
-            maintainersLayout.removeAllViews();
-            for (MaintainerInfo maintainer : maintainers) {
-                ExtraCardView maintainerCard = createMaintainerCard(getActivity());
-                maintainerCard.setSummary(maintainer.getName());
-                maintainerCard.setOnClickListener(v -> openUrl(Utils.getMaintainerURL(maintainer.getUsername())));
-                maintainerCard.setClickable(true);
-                maintainersLayout.addView(maintainerCard);
-            }
-        }
-
         if (update.getDonateUrl() != null && !update.getDonateUrl().isEmpty()) {
             donateCard.setOnClickListener(v -> openUrl(update.getDonateUrl()));
             donateCard.setClickable(true);
@@ -341,22 +329,6 @@ public class ExtrasFragment extends Fragment {
             newsCard.setVisibility(View.VISIBLE);
         }
 
-    }
-
-    private ExtraCardView createMaintainerCard(Context context) {
-        ExtraCardView card = new ExtraCardView(context);
-        card.setTitle(getString(R.string.maintainer_info_title));
-        card.setImage(getResources().getDrawable(R.drawable.ic_maintainers_icon, context.getTheme()));
-        card.setCardBackgroundColor(getResources().getColor(R.color.cardview_background, context.getTheme()));
-        card.setRadius(getResources().getDimension(R.dimen.extra_card_corner_radius));
-        card.setCardElevation(getResources().getDimension(R.dimen.extra_card_elevation));
-        int padding = (int) getResources().getDimension(R.dimen.extra_card_content_padding);
-        card.setContentPadding(padding, padding, padding, padding);
-        int extraMargin = (int) getResources().getDimension(R.dimen.extra_card_layout_margin);
-        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        buttonLayoutParams.setMargins(extraMargin, extraMargin, extraMargin, extraMargin);
-        card.setLayoutParams(buttonLayoutParams);
-        return card;
     }
 
     private void showSnackbar(int stringId, int duration) {

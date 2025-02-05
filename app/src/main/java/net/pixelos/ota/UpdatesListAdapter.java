@@ -228,15 +228,6 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         viewHolder.mBuildDate.setText(buildDate);
         viewHolder.mBuildName.setText(buildVersion);
         viewHolder.mBuildName.setCompoundDrawables(null, null, null, null);
-        viewHolder.mDetails.setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Utils.getDownloadWebpageUrl(mUpdate.getName())));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            } catch (Exception ex) {
-                showSnackbar(mContext.getString(R.string.error_open_url));
-            }
-        });
 
         if (activeLayout) {
             handleActiveStatus(viewHolder);
